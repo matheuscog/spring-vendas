@@ -17,21 +17,22 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(RegraNegocioException.class)
     @ResponseStatus(BAD_REQUEST)
-    public Response handleRegraNegocioException(RegraNegocioException ex){
+    public Response handleRegraNegocioException(RegraNegocioException ex) {
         return new Response(ex.getMessage());
     }
 
     @ExceptionHandler(PedidoNaoEncontradoException.class)
     @ResponseStatus(NOT_FOUND)
-    public Response handlePedidoNotFoundException(PedidoNaoEncontradoException ex){
+    public Response handlePedidoNotFoundException(PedidoNaoEncontradoException ex) {
         return new Response(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(BAD_REQUEST)
-    public Response handleMethodNotValidException(MethodArgumentNotValidException ex){
-        var list = ex.getBindingResult().getAllErrors().stream().map(
-                DefaultMessageSourceResolvable::getDefaultMessage).toList();
+    public Response handleMethodNotValidException(MethodArgumentNotValidException ex) {
+        var list = ex.getBindingResult().getAllErrors().stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+            .toList();
 
         return new Response(list);
     }
